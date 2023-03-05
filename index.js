@@ -1,6 +1,7 @@
 // Imports and defines call for Inquirer
 const inquirer = require("inquirer");
 // Imports file system and defines WriteFile function call
+const fs = require("fs");
 const { writeFile } = require('fs').promises;
 
 // Defines prompts array for inquirer
@@ -1302,6 +1303,10 @@ ${license}
 
 // Defines init function
 const init = () => {
+  // Makes the Output folder if it doesn't already exist
+  fs.mkdir('./Output/', { recursive: true }, (err) => {
+    if (err) throw err;
+  });
   // Runs promptQuestions function
   promptQuestions()
   // Once promptQuestions is completed, user input is passed to licenseSelect Function

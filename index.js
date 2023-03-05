@@ -1,54 +1,65 @@
-// TODO: Include packages needed for this application
+// Imports and defines call for Inquirer
 const inquirer = require("inquirer");
+// Imports file system and defines WriteFile function call
 const { writeFile } = require('fs').promises;
 
-// TODO: Create an array of questions for user input
+// Defines prompts array for inquirer
 const prompts = [
+  // Project name
   {
     type: "input",
     name: "project",
     message: "Write the name of the project.\n",
   },
+  // Description
   {
     type: "input",
     name: "desc",
     message: "Write a short description of the project.\n",
   },
+  // Installation Instructions
   {
     type: "input",
     name: "install",
     message: "Write installation instructions for the project.\n",
   },
+  // Usage Instructions
   {
     type: "input",
     name: "usage",
     message: "Write instructions for using the project.\n",
   },
+  // Testing Instructions
   {
     type: "input",
     name: "tests",
     message: "Write instructions for testing the project.\n",
   },
+  // GitHub
   {
     type: "input",
     name: "github",
     message: "Write the name of the GitHub profile that owns the project. (Note: This is case-sensitive)\n",
   },
+  // Email
   {
     type: "input",
     name: "email",
     message: "Write the email address that users should direct questions to.\n",
   },
+  // Contribution Guidelines
   {
     type: "input",
     name: "contributing",
     message: "Write guidelines for contributing to the project.\n",
   },
+  // Credits
   {
     type: "input",
     name: "credits",
     message: "Write the names of the people and/or organizations who worked on this project as well as what third party assets were used.\n",
   },
+  // License
   {
     type: "list",
     name: "license",
@@ -64,19 +75,27 @@ const prompts = [
   }
 ];
 
+// Defines promptQuestions function
 const promptQuestions = () => {
+  // Runs Inquirer with previously defined prompts
   return inquirer.prompt(prompts)
 };
 
+// Declares variables for following function in global scope
 var license;
 var badge;
 var licensing;
 
+// Defines licenseSelect function
 const licenseSelect = (input) => {
+  // Variables previously declared are defined based on input
   license = input.license;
   badge = input.badge;
+  // Switch operation that checks license variable
   switch (license) {
+    // When license is The Unlicense
     case "The Unlicense": {
+      // licensing variable defined as object containing markdown-formatted license and badge
       licensing = {
         license: 
 `This is free and unencumbered software released into the public domain.\n
@@ -87,7 +106,9 @@ For more information, please refer to <https://unlicense.org>
 `,
       badge: "!(https://img.shields.io/badge/license-The%20Unlicense-green)"
       }
+      // licensing object replaces license and badge properties in input
       input = {...input, ...licensing};
+      // Modified input is passed through
       return input;
     }
     case "Boost Software License 1.0": {
@@ -1235,8 +1256,8 @@ Public License instead of this License.  But first, please read\n
   }
 }
 
-// TODO: Create a function to write README file
-
+// Defines generateREADME function
+// Uses input from prompts in a markdown-formatted text
 const generateREADME = ({ project, badge, desc, install, usage, tests, github, email, contributing, credits, license }) => 
 `# ${project}
 
@@ -1279,16 +1300,18 @@ ${credits}
 ${license}
 `;
 
-// TODO: Create a function to initialize app
-const fileName = "README.md";
-
+// Defines init function
 const init = () => {
+  // Runs promptQuestions function
   promptQuestions()
+  // Once promptQuestions is completed, user input is passed to licenseSelect Function
   .then((input) => licenseSelect(input))
-  .then((licensedInput) => writeFile(fileName, generateREADME(licensedInput)))
-  .then(() => console.log("Success! Created " + fileName))
+  // Once licenseSelect function is completed, licensedInput is passed to writeFile function and generates the READEME file in the Output folder
+  .then((licensedInput) => writeFile("./Output/README.md", generateREADME(licensedInput)))
+  // Success message or error message is printed to the console
+  .then(() => console.log("Success! Created README in Output folder"))
   .catch((err) => console.error(err));
 }
 
-// Function call to initialize app
+// Runs init function when index.js runs
 init();

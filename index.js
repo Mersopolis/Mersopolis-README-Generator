@@ -10,13 +10,13 @@ const prompts = [
   {
     type: "input",
     name: "project",
-    message: "Write the name of the project.\n",
+    message: "Write the name of the project. (Then press Enter to go to the next step)\n",
   },
   // Description
   {
     type: "input",
     name: "desc",
-    message: "Write a short description of the project.\n",
+    message: "Write a short description of the project. (Remember to use <br/> to start a new line instead of pressing Enter)\n",
   },
   // Installation Instructions
   {

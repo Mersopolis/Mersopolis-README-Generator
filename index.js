@@ -1286,8 +1286,8 @@ ${usage}
 ${tests}
 
 ## Questions
-Questions can be directed to this GitHub profile or this email.
-GitHub: [${github}](https://github.com/${github})
+Questions can be directed to this GitHub profile or this email.\n
+GitHub: [${github}](https://github.com/${github})\n
 Email: [${email}](mailto:${email})
 
 ## Contributing

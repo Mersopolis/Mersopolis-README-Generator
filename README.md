@@ -26,7 +26,9 @@ N/A
 
 ## Questions
 Questions can be directed to this GitHub profile or this email.
+
 GitHub: [Mersopolis](https://github.com/Mersopolis)
+
 Email: [mersopolis@gmail.com](mailto:mersopolis@gmail.com)
 
 ## Contributing
